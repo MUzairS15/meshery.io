@@ -217,7 +217,7 @@ jobs:
     uses: ./.github/workflows/meshmap.yml
     needs: [UpdateCloudNativeCatalog]
     with:
-      fileName: ${{ needs.UpdateCloudNativeCatalog.outputs.designFilePath }} 
+      filePath: ${{ needs.UpdateCloudNativeCatalog.outputs.designFilePath }} 
   test:
     needs: [call_meshmap_snapshot]
     runs-on: ubuntu-latest
