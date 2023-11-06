@@ -8,6 +8,8 @@ on:
 jobs:
   UpdateCloudNativeCatalog:
     runs-on: ubuntu-22.04
+    outputs:
+      filePath: ${{ steps.update_catalog_patterns.outputs.designFilePath }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -23,8 +25,9 @@ jobs:
           cd ./collections/_catalog
           for dir in */; do find $dir -maxdepth 1 -type f -delete; done
           cd ../../
-      - name: Update Catalog Patterns
-        run: echo "filePath=catalog/1d2ca262-3d69-4bfd-86ff-61b3c9162881.yaml" >> $GITHUB_ENV 
+      - id: update_catalog_patterns
+        name: Update Catalog Patterns
+        run: echo "designFilePath=catalog/1d2ca262-3d69-4bfd-86ff-61b3c9162881.yaml" >> $GITHUB_OUTPUT
         shell: bash
       #   if: ${{ success() }}
       #   run: |
@@ -209,9 +212,15 @@ jobs:
       #     commit_author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
       #     commit_options: '--signoff'
       #     commit_message: '[Catalog] Update Catalog items'
-      - id: meshmap_snapshot
-        uses: ./.github/workflows/meshmap.yml
-        with:
-          filePath: ${{env.filePath }}
-      - name: "Echo resource url"
-        run: echo $ {{ steps.meshmap_snapshot.outputs }}
+  call_meshmap_snapshot:
+    secrets: inherit
+    uses: ./.github/workflows/meshmap.yml
+    needs: [UpdateCloudNativeCatalog]
+    with:
+      fileName: ${{ needs.UpdateCloudNativeCatalog.outputs.designFilePath }} 
+  test:
+    needs: [call_meshmap_snapshot]
+    runs-on: ubuntu-latest
+    steps:
+    - name: "Resource URL"
+      run: echo ${{needs.call_meshmap_snapshot.outputs.resource_url}}
