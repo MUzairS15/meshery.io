@@ -5,7 +5,7 @@ on: # rebuild any PRs and main branch changes
   
   workflow_call:
     inputs:
-      fileName: 
+      filePath: 
         description: Relative file path from the root directory
         required: true
         type: string
@@ -44,4 +44,4 @@ jobs:
           prNumber: ${{ env.PULL_NO }} # auto-filled from the above step
           application_type: "Design" # your application type, could be any of three: "Kubernetes Manifest", "Docker Compose", "Helm Chart"
           skipComment: true
-          filePath: ${{ inputs.fileName }} # relative file-path from the root directory in the github-runner env, you might require to checkout the repository as described in step 2
+          filePath: ${{ inputs.filePath }} # relative file-path from the root directory in the github-runner env, you might require to checkout the repository as described in step 2
