@@ -210,7 +210,7 @@ jobs:
       #     commit_options: '--signoff'
       #     commit_message: '[Catalog] Update Catalog items'
       - id: meshmap_snapshot
-        uses: /.github/workflows/meshmap.yml
+        uses: ./.github/workflows/meshmap.yml
         with:
           filePath: ${{env.filePath }}
       - name: "Echo resource url"
