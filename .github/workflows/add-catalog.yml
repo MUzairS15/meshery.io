@@ -9,7 +9,7 @@ jobs:
   UpdateCloudNativeCatalog:
     runs-on: ubuntu-22.04
     outputs:
-      filePath: ${{ steps.update_catalog_patterns.outputs.designFilePath }}
+      designID: ${{ steps.update_catalog_patterns.outputs.designID }}
       assetLocation: ${{ steps.update_catalog_patterns.outputs.assetLocation }}
     steps:
       - name: Checkout Code
@@ -49,7 +49,7 @@ jobs:
             patternName="$(jq -r .[$idx].name temp.json)"
             patternImageURL="$(jq -r .[$idx].catalog_data.imageURL temp.json)"
             compatibility=""
-            echo "designFilePath=catalog/$designId.yaml" >> $GITHUB_OUTPUT
+            echo "designID=$designId" >> $GITHUB_OUTPUT
             echo "assetLocation=$patternImageURL" >> $GITHUB_OUTPUT
             # check if directory doesn't exists; then create it
             if [ ! -d "./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')"" ]; then
@@ -219,7 +219,7 @@ jobs:
     uses: ./.github/workflows/meshmap.yml
     needs: [UpdateCloudNativeCatalog]
     with:
-      filePath: ${{ needs.UpdateCloudNativeCatalog.outputs.filePath }} 
+      designID: ${{ needs.UpdateCloudNativeCatalog.outputs.designID }} 
       assetLocation: ${{ needs.UpdateCloudNativeCatalog.outputs.assetLocation }}
   output_resource_url:
     needs: [call_meshmap_snapshot]
