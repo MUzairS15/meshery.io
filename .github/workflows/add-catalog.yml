@@ -50,6 +50,7 @@ jobs:
             patternImageURL="$(jq -r .[$idx].catalog_data.imageURL temp.json)"
             
             patternFile="$(jq -r .[$idx].pattern_file temp.json)"
+            echo $patternFile
             services="$(echo $patternFile | yq .services)"
 
             if [[ $patternImageURL == "null" || $patternImageURL == "" ]]; then
