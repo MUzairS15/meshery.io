@@ -55,7 +55,7 @@ jobs:
             if [[ $patternImageURL == "null" || $patternImageURL == "" ]]; then
               patternImageURL=https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/$designId.png
             fi
-
+            echo $services
             if [[ $services == "null" ]]; then
               patternImageURL="/assets/images/logos/service-mesh-pattern.svg"
             fi
