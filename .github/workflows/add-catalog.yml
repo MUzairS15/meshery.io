@@ -88,7 +88,7 @@ jobs:
             echo "$patternFile" > $MESHERY_CATALOG_FILES_DIR/$designId.yaml
             services=$(yq '.services' $MESHERY_CATALOG_FILES_DIR/$designId.yaml) 2>./err.txt 
             echo $services
-            if [[ $services == "null" || $services == ""]]; then
+            if [[ $services == "null" || $services == "" ]]; then
               patternImageURL="/assets/images/logos/service-mesh-pattern.svg"
             fi
             echo $patternImageURL
