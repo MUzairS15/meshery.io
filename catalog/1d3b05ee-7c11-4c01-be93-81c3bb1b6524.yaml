@@ -1,9 +1,18 @@
 name: Emojivoto Application
 services:
+
+  round-pentagon-tp:
+    name: round-pentagon-tp
+    type: RoundPentagon
+    apiVersion: core.meshery.io/v1alpha1
+
   emojivoto:
     name: emojivoto
     type: Namespace.K8s
+
     namespace: default
+    version: 1.0.0
+    model: meshery-shapes
     traits:
       meshmap:
         edges: []

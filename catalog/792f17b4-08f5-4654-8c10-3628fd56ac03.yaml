@@ -4,12 +4,13 @@ services:
     name: comment-dw
     type: Comment
     apiVersion: core.meshery.io/v1alpha1
+
+    namespace: default
     version: v1.0.0
     model: meshery-core
     settings:
       lastUpdated: "2023-12-07T10:09:48.428Z"
       status: false
-      user Messages: []
       usersMessages:
       - avatarUrl: https://avatars.githubusercontent.com/u/71271069?v=4
         firstName: Yash
@@ -65,8 +66,8 @@ services:
           svgComplete: ""
           svgWhite: ui/public/static/img/meshmodels/meshery-core/color/comment-color.svg
         position:
-          posX: 496.3643199081262
-          posY: 118.39403845509617
+          posX: 510
+          posY: 130
         whiteboardData:
           style:
             z-index: 18
@@ -74,12 +75,12 @@ services:
     name: comment-xt
     type: Comment
     apiVersion: core.meshery.io/v1alpha1
+    namespace: default
     version: v1.0.0
     model: meshery-core
     settings:
       lastUpdated: "2023-12-07T10:09:11.675Z"
       status: false
-      user Messages: []
       usersMessages:
       - avatarUrl: https://avatars.githubusercontent.com/u/71271069?v=4
         firstName: Yash
@@ -202,9 +203,6 @@ services:
     model: kubernetes
     annotations:
       name: elasticsearch
-    settings:
-      image Pull Secrets: []
-      secrets: []
     traits:
       meshmap:
         edges: []
@@ -600,8 +598,8 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/kubernetes-white.svg
         parent: a5a3d40c-c5b7-4648-850c-f452f59bd8d3
         position:
-          posX: 232.5542033202801
-          posY: 142.51607199269895
+          posX: 270
+          posY: 190
         whiteboardData:
           style:
             z-index: 7
@@ -721,8 +719,6 @@ services:
           svgWhite: ui/public/static/img/meshmodels/kubernetes/white/clusterrole-white.svg
         parent: a5a3d40c-c5b7-4648-850c-f452f59bd8d3
         position:
-          posX: 314.15724274508887
-          posY: 150.1751774850174
         whiteboardData:
           style:
             z-index: 8
