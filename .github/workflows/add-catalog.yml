@@ -56,8 +56,7 @@ jobs:
             fi
             
             compatibility=""
-            echo "contentID=$designId" >> $GITHUB_OUTPUT
-            echo "assetLocation=$patternImageURL" >> $GITHUB_OUTPUT
+            
             # check if directory doesn't exists; then create it
             if [ ! -d "./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')"" ]; then
               echo "$(echo $patternType | tr '[:upper:]' '[:lower:]') doesn't exist."
