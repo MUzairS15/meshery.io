@@ -46,11 +46,9 @@ jobs:
             patternInfo="$(jq -r .[$idx].catalog_data.pattern_info temp.json)"
             patternCaveats="$(jq -r .[$idx].catalog_data.pattern_caveats temp.json)"
             patternType="$(jq -r .[$idx].catalog_data.type temp.json)"
-            patternName="$(jq -r .[$idx].name temp.json)"            
+            patternName="$(jq -r .[$idx].name temp.json)"
             patternFile="$(jq -r .[$idx].pattern_file temp.json)"
-            
             patternImageURL="$(jq -r .[$idx].catalog_data.imageURL temp.json)"
-
             if [[ "$patternImageURL" == "null" || "$patternImageURL" == "" ]]; then
                 patternImageURL="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/$designId-light.png,https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/$designId-dark.png"
             else 
