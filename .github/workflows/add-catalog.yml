@@ -52,13 +52,14 @@ jobs:
             if [[ "$patternImageURL" == "null" || "$patternImageURL" == "" ]]; then
                 patternImageURL="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/$designId-light.png,https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/$designId-dark.png"
             else 
-              url_type="$(jq -r .[$idx].catalog_data.imageURL temp.json | jq 'if type=="array" then "array" else "string" end')"
+              url_type=$(jq -r ".[$idx].catalog_data.imageURL | type" temp.json)
               
               echo "url_type: $url_type"
 
-              if [[ $url_type == "\"array\"" ]]; then
-                patternImageURL="$(jq -r ".[$idx].catalog_data.imageURL | join(\",\")" temp.json)"
+              if [[ $url_type == "array" ]]; then
+                  patternImageURL="$(jq -r ".[$idx].catalog_data.imageURL | join(\",\")" temp.json)"
               fi
+              
             fi
             
             echo "$patternImageURL"
