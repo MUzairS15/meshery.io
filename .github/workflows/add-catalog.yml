@@ -50,16 +50,18 @@ jobs:
             patternFile="$(jq -r .[$idx].pattern_file temp.json)"
             
             url_type="$(jq -r .[$idx].catalog_data.imageURL temp.json | jq 'if type=="array" then "array" else "string" end')"
-            if [[ $url_type == "array" ]]; then
-            foo=(a "b c" d); bar=$(IFS=, ; echo "${foo[*]}"); echo "$bar"
-                patternImageURL="$(IFS=, ; echo "${patternImageURL[*]}")"
-            else
-                patternImageURL="$(jq -r .[$idx].catalog_data.imageURL temp.json)"
-            fi
-            echo "$url_type" "$patternImageURL"
+            
+            echo "url_type: $url_type"
+            patternImageURL="$(jq -r .[$idx].catalog_data.imageURL temp.json)"
 
-            if [[ $patternImageURL == "null" || $patternImageURL == "" ]]; then
-              patternImageURL=https://raw.githubusercontent.com/MUzairS15/meshery-extensions-packages/master/action-assets/design-assets/$designId.png
+            if [[ $url_type == "\"array\"" ]]; then
+                patternImageURL="$(jq -r ".[$idx].catalog_data.imageURL | join(\",\")" temp.json)"
+            fi
+
+            echo "$patternImageURL"
+
+            if [[ "$patternImageURL" == "null" || "$patternImageURL" == "" ]]; then
+                patternImageURL="https://raw.githubusercontent.com/layer5labs/meshery-extensions-packages/master/action-assets/design-assets/$designId.png"
             fi
             
             compatibility=""
