@@ -86,7 +86,6 @@ jobs:
               compatibility+="    - $(jq -r ".[$idx].catalog_data.compatibility[$compatIdx]" temp.json)"
             done
             echo "$patternFile" > $MESHERY_CATALOG_FILES_DIR/$designId.yaml
-
             services=$(yq '.services' $MESHERY_CATALOG_FILES_DIR/$designId.yaml 2>/dev/null)
             if [[ $services == "null" || $services == "" ]]; then
               patternImageURL="/assets/images/logos/service-mesh-pattern.svg"
@@ -127,7 +126,7 @@ jobs:
           -H "Authorization: Bearer ${{ secrets.GH_ACCESS_TOKEN }}" \
           -H "X-GitHub-Api-Version: 2022-11-28" \
           "https://api.github.com/repos/meshery/meshery.io/actions/workflows/meshmap.yml/dispatches" \
-          -d '{"ref":"master","inputs":{"contentID":"'$designId'","assetLocation":"'$patternImageURL'"}}'
+          -d '{"ref":"master","inputs":{"contentID":"'$designId'","assetLocation":"$join(patternImageURL, ',')"}}'
           
           done
           rm temp.json
