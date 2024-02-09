@@ -121,7 +121,7 @@ jobs:
           downloadLink: $designId.yaml
           ---" > ./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')"/$designId.md
           
-          echo "$join(patternImageURL, ',')"
+          echo "$(join(patternImageURL, ','))"
           curl -L \
           -X POST \
           -H "Accept: application/vnd.github+json" \
