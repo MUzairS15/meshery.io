@@ -120,6 +120,8 @@ jobs:
           URL: 'https://raw.githubusercontent.com/meshery/meshery.io/master/$MESHERY_CATALOG_FILES_DIR/$designId.yaml'
           downloadLink: $designId.yaml
           ---" > ./collections/_catalog/"$(echo $patternType | tr '[:upper:]' '[:lower:]')"/$designId.md
+          
+          echo "$join(patternImageURL, ',')"
           curl -L \
           -X POST \
           -H "Accept: application/vnd.github+json" \
